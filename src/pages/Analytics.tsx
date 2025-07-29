@@ -2,7 +2,7 @@ import Layout from "../components/layout/Layout";
 import SearchBox from "../components/ui/SearchBox";
 import FilterPanel from "../components/ui/FilterPanel";
 import Table from "../components/ui/Table";
-import BarChart from "../components/charts/BarChart";
+import StockByTypeChart from "../components/charts/StockByTypeChart";
 import PriceLineChart from "../components/charts/PriceLineChart";
 import { useState } from "react";
 
@@ -62,7 +62,7 @@ const Analytics = () => {
         </div>
         <div className="bg-white rounded-lg shadow p-4">
           <h2 className="text-lg font-semibold mb-2">موجودی بر اساس نوع</h2>
-          <BarChart />
+          <StockByTypeChart />
         </div>
       </div>
     </Layout>
