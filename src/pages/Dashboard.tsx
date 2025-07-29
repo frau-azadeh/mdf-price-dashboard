@@ -5,25 +5,35 @@ import Table from "../components/ui/Table";
 import SearchBox from "../components/ui/SearchBox";
 import FilterPanel from "../components/ui/FilterPanel";
 
+import Pagination from "../components/ui/Pagination";
 
 const Dashboard = () => {
+  const [query, setQuery] = useState("");
+  const [type, setType] = useState("");
+  const [size, setSize] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
 
-    const [query, setQuery] = useState("");
-    const [type, setType] = useState("");
-    const [size, setSize] = useState("");
-  
-    const sampleData = [
-      { id: 1, name: "میلگرد A3", type: "آجدار", size: "16", stock: 100, price: 26500, lastUpdate: "1403/05/07" },
-      { id: 2, name: "میلگرد A2", type: "ساده", size: "12", stock: 80, price: 24500, lastUpdate: "1403/05/07" },
-    ];
-  
-    const filteredData = sampleData.filter(
-      (item) =>
-        (item.name.includes(query) || item.type.includes(query)) &&
-        (type === "" || item.type === type) &&
-        (size === "" || item.size === size)
-    );
-  
+  const sampleData = [
+    // (میتونی دیتاهای بیشتری اضافه کنی برای تست صفحه‌بندی)
+    { id: 1, name: "میلگرد A3", type: "آجدار", size: "16", stock: 100, price: 26500, lastUpdate: "1403/05/07" },
+    { id: 2, name: "میلگرد A2", type: "ساده", size: "12", stock: 80, price: 24500, lastUpdate: "1403/05/07" },
+    { id: 3, name: "میلگرد A4", type: "آجدار", size: "14", stock: 120, price: 28500, lastUpdate: "1403/05/07" },
+    { id: 4, name: "میلگرد A3", type: "آجدار", size: "16", stock: 110, price: 27500, lastUpdate: "1403/05/07" },
+    { id: 5, name: "میلگرد A2", type: "ساده", size: "12", stock: 70, price: 24000, lastUpdate: "1403/05/07" },
+    { id: 6, name: "میلگرد A3", type: "آجدار", size: "16", stock: 90, price: 26000, lastUpdate: "1403/05/07" },
+  ];
+
+  const filteredData = sampleData.filter(
+    (item) =>
+      (item.name.includes(query) || item.type.includes(query)) &&
+      (type === "" || item.type === type) &&
+      (size === "" || item.size === size)
+  );
+
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedData = filteredData.slice(startIndex, startIndex + itemsPerPage);
 
   return (
     <Layout>
@@ -38,7 +48,9 @@ const Dashboard = () => {
         onTypeChange={setType}
         onSizeChange={setSize}
       />
-      <Table data={filteredData} />
+<Table data={paginatedData} />
+<Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+
     </div>
 
       {/* نمودارها */}
