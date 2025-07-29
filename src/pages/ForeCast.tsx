@@ -1,6 +1,8 @@
 // src/pages/Forecast.tsx
 import ForecastTable from "../components/ui/ForecastTable";
 import Layout from "../components/layout/Layout";
+import ForecastChart from "../components/charts/ForecastChart";
+
 
 const sampleDailyData = [
   { date: "1403/05/08", type: "A3", size: "16", predictedPrice: 26900 },
@@ -24,6 +26,7 @@ const Forecast = () => {
           {/* نمودار قیمت */}
           <h2 className="font-semibold mb-2">نمودار روند پیش‌بینی</h2>
           <div className="text-sm text-gray-500">نمودار لاین چارت</div>
+          <ForecastChart />
         </div>
       </div>
 
