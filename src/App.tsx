@@ -1,12 +1,9 @@
-
+// src/App.tsx
+import Dashboard from "./pages/Dashboard";
 import "./App.css";
 
 function App() {
-  return (
-    <div >
-     <p className="text-red-900 text-center">سلاممممممممممممم</p>
-    </div>
-  );
+  return <Dashboard />;
 }
 
 export default App;
