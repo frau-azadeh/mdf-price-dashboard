@@ -6,6 +6,9 @@ import SearchBox from "../components/ui/SearchBox";
 import FilterPanel from "../components/ui/FilterPanel";
 
 import Pagination from "../components/ui/Pagination";
+import DashboardChartLine from "../components/charts/DashboardChartLine";
+import DashboardChartBar from "../components/charts/DashboardChartBar";
+import DashboardChartPie from "../components/charts/DashboardChartPie";
 
 const Dashboard = () => {
   const [query, setQuery] = useState("");
@@ -55,9 +58,15 @@ const Dashboard = () => {
 
       {/* نمودارها */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-white rounded-lg shadow p-4">نمودار ۱</div>
-        <div className="bg-white rounded-lg shadow p-4">نمودار ۲</div>
-        <div className="bg-white rounded-lg shadow p-4">نمودار ۳</div>
+        <div className="bg-white rounded-lg shadow p-4">
+            <DashboardChartLine/>
+        </div>
+        <div className="bg-white rounded-lg shadow p-4">
+            <DashboardChartBar/>
+        </div>
+        <div className="bg-white rounded-lg shadow p-4">
+            <DashboardChartPie/>
+        </div>
       </div>
     </Layout>
   );
