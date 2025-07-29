@@ -10,6 +10,16 @@ const sampleDailyData = [
   { date: "1403/05/10", type: "A3", size: "16", predictedPrice: 27000 },
 ];
 
+const weeklyData = [
+    { date: "1403/05/14", type: "A3", size: 16, predictedPrice: 27300 },
+    { date: "1403/05/15", type: "A3", size: 16, predictedPrice: 27100 },
+  ];
+  
+  const monthlyData = [
+    { date: "1403/06/01", type: "A3", size: 16, predictedPrice: 27800 },
+    { date: "1403/06/08", type: "A3", size: 16, predictedPrice: 28000 },
+  ];
+  
 
 const Forecast = () => {
   return (
@@ -32,12 +42,10 @@ const Forecast = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-white p-4 rounded shadow">
-          <h2 className="font-semibold mb-2">پیش‌بینی هفتگی</h2>
-          <div className="text-sm text-gray-500">اینجا جدول هفتگی میاد</div>
+          <ForecastTable title="پیش‌بینی هفتگی" data={weeklyData} />
         </div>
         <div className="bg-white p-4 rounded shadow">
-          <h2 className="font-semibold mb-2">پیش‌بینی ماهانه</h2>
-          <div className="text-sm text-gray-500">اینجا جدول ماهانه میاد</div>
+          <ForecastTable title="پیش‌بینی ماهانه" data={monthlyData} />
         </div>
       </div>
     </Layout>
