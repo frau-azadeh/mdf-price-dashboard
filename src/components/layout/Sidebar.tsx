@@ -9,7 +9,6 @@ const Sidebar = () => {
     { name: "داشبورد", icon: <Home />, link: "/" },
     { name: "تحلیل قیمت", icon: <BarChart3 />, link: "/analytics" },
     { name: "پیش‌بینی قیمت", icon: <LineChart />, link: "/forecast" },
-    { name: "مدیریت کاربران", icon: <Users />, link: "/users" },
   ];
 
   return (
