@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Menu, Home, BarChart3, Users, LineChart } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   const [open, setOpen] = useState(true);
@@ -24,12 +25,18 @@ const Sidebar = () => {
 
       <ul className="mt-4 space-y-3 pr-4">
         {menus.map((item, index) => (
-          <li
-            key={index}
-            className="flex items-center gap-3 cursor-pointer hover:bg-neutral-800 p-2 rounded-md transition"
-          >
-            {item.icon}
-            {open && <span className="text-sm">{item.name}</span>}
+          <li key={index}>
+            <NavLink
+              to={item.link}
+              className={({ isActive }) =>
+                `flex items-center gap-3 p-2 rounded-md transition ${
+                  isActive ? "bg-red-600" : "hover:bg-neutral-800"
+                }`
+              }
+            >
+              {item.icon}
+              {open && <span className="text-sm">{item.name}</span>}
+            </NavLink>
           </li>
         ))}
       </ul>
