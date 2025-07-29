@@ -2,8 +2,8 @@ import Layout from "../components/layout/Layout";
 import SearchBox from "../components/ui/SearchBox";
 import FilterPanel from "../components/ui/FilterPanel";
 import Table from "../components/ui/Table";
-import LineChart from "../components/charts/LineChart";
 import BarChart from "../components/charts/BarChart";
+import PriceLineChart from "../components/charts/PriceLineChart";
 import { useState } from "react";
 
 const sampleData = [
@@ -58,7 +58,7 @@ const Analytics = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
         <div className="bg-white rounded-lg shadow p-4">
           <h2 className="text-lg font-semibold mb-2">نمودار تغییر قیمت</h2>
-          <LineChart />
+          <PriceLineChart />
         </div>
         <div className="bg-white rounded-lg shadow p-4">
           <h2 className="text-lg font-semibold mb-2">موجودی بر اساس نوع</h2>
