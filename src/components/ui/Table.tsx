@@ -4,9 +4,10 @@ import { Product } from "../../type/types";
 
 type TableProps = {
   data: Product[];
+  startIndex: number;
 };
 
-const Table: FC<TableProps> = ({ data }) => {
+const Table: FC<TableProps> = ({ data , startIndex}) => {
   return (
     <div className="overflow-x-auto rounded-lg shadow bg-white">
       <table className="w-full text-sm text-right rtl:text-right">
@@ -26,17 +27,14 @@ const Table: FC<TableProps> = ({ data }) => {
         </thead>
         <tbody>
           {data.map((item, i) => {
-            let formattedDate = "-";
-            if (item.lastPriceDate) {
-              formattedDate = moment(
-                item.lastPriceDate,
-                "jYYYY-jMM-jDDTHH:mm:ss"
-              ).format("jYYYY/jMM/jDD");
-            }
+            const formattedDate = item.lastPriceDate
+            ? moment(item.lastPriceDate, "jYYYY-MM-DD").format("jYYYY/MM/DD")
+            : "-";
+          
 
             return (
               <tr key={item.id} className="border-b hover:bg-gray-50">
-                <td className="p-3">{i + 1}</td>
+                <td className="p-3">{startIndex + i + 1}</td>
                 <td className="p-3">{item.name}</td>
                 <td className="p-3">{item.type}</td>
                 <td className="p-3">{item.size}</td>
