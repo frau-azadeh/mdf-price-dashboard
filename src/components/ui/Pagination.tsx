@@ -19,7 +19,7 @@ const Pagination: FC<Props> = ({ currentPage, totalPages, onPageChange }) => {
           onClick={() => onPageChange(page)}
           className={`px-3 py-1 border rounded ${
             page === currentPage
-              ? "bg-blue-600 text-white"
+              ? "bg-red-600 text-white"
               : "bg-white text-gray-800"
           }`}
         >
