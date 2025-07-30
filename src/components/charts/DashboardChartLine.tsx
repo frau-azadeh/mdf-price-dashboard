@@ -1,15 +1,50 @@
-// src/components/charts/DashboardChart1.tsx
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import { useEffect, useState } from "react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
+import { getProducts } from "../../services/api";
+import { Product } from "../../type/types";
+import moment from "moment-jalaali";
 
-const data = [
-  { date: "1403/05/05", price: 26000 },
-  { date: "1403/05/06", price: 26200 },
-  { date: "1403/05/07", price: 26500 },
-  { date: "1403/05/08", price: 26800 },
-  { date: "1403/05/09", price: 27000 },
-];
+interface ChartData {
+  date: string;
+  price: number;
+}
 
 const DashboardChartLine = () => {
+  const [data, setData] = useState<ChartData[]>([]);
+
+  useEffect(() => {
+    getProducts().then((products: Product[]) => {
+      const grouped: Record<string, { total: number; count: number }> = {};
+
+      products.forEach((item) => {
+        const dateKey = item.lastPriceDate
+          ? moment(item.lastPriceDate, "jYYYY-MM-DD").format("jYYYY/MM/DD")
+          : "نامشخص";
+
+        if (!grouped[dateKey]) {
+          grouped[dateKey] = { total: 0, count: 0 };
+        }
+        grouped[dateKey].total += item.price;
+        grouped[dateKey].count += 1;
+      });
+
+      const chartData = Object.entries(grouped).map(([date, { total, count }]) => ({
+        date,
+        price: Math.round(total / count),
+      }));
+
+      setData(chartData);
+    });
+  }, []);
+
   return (
     <ResponsiveContainer width="100%" height={300}>
       <LineChart data={data} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
