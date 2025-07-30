@@ -42,6 +42,18 @@ const Dashboard = () => {
     <Layout>
       <h1 className="text-2xl font-bold mb-4">داشبورد مدیریت قیمت میلگرد</h1>
       
+      {/* نمودارها */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="bg-white rounded-lg shadow p-4">
+            <DashboardChartLine/>
+        </div>
+        <div className="bg-white rounded-lg shadow p-4">
+            <DashboardChartBar/>
+        </div>
+        <div className="bg-white rounded-lg shadow p-4">
+            <DashboardChartPie/>
+        </div>
+      </div>
       {/* جدول قیمت‌ها */}
       <div className="bg-white rounded-lg shadow p-4 mb-6 space-y-4">
       <SearchBox value={query} onChange={setQuery} />
@@ -56,18 +68,6 @@ const Dashboard = () => {
 
     </div>
 
-      {/* نمودارها */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-white rounded-lg shadow p-4">
-            <DashboardChartLine/>
-        </div>
-        <div className="bg-white rounded-lg shadow p-4">
-            <DashboardChartBar/>
-        </div>
-        <div className="bg-white rounded-lg shadow p-4">
-            <DashboardChartPie/>
-        </div>
-      </div>
     </Layout>
   );
 };
