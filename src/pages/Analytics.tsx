@@ -4,41 +4,42 @@ import FilterPanel from "../components/ui/FilterPanel";
 import Table from "../components/ui/Table";
 import StockByTypeChart from "../components/charts/StockByTypeChart";
 import PriceLineChart from "../components/charts/PriceLineChart";
-import { useState } from "react";
-
-const sampleData = [
-  {
-    id: 1,
-    name: "میلگرد A3",
-    type: "آجدار",
-    size: "16",
-    stock: 120,
-    price: 27000,
-    lastUpdate: "1403/05/01",
-  },
-  {
-    id: 2,
-    name: "میلگرد A2",
-    type: "ساده",
-    size: "14",
-    stock: 80,
-    price: 25000,
-    lastUpdate: "1403/05/01",
-  },
-  // داده‌های بیشتر برای تست
-];
+import { useEffect, useState } from "react";
+import { getProducts } from "../services/api";
+import { Product } from "../type/types";
 
 const Analytics = () => {
   const [query, setQuery] = useState("");
   const [type, setType] = useState("");
   const [size, setSize] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [data, setData] = useState<Product[]>([]);
+  const itemsPerPage = 50;
 
-  const filtered = sampleData.filter(
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const products = await getProducts();
+        setData(products);
+      } catch (error) {
+        console.error("خطا در گرفتن داده‌ها:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  // فیلتر کردن داده‌ها
+  const filtered = data.filter(
     (item) =>
-      (item.name.includes(query) || item.type.includes(query)) &&
+      (item.name?.includes(query) || item.type?.includes(query)) &&
       (type === "" || item.type === type) &&
       (size === "" || item.size === size)
   );
+
+  // صفحه‌بندی
+  const totalPages = Math.ceil(filtered.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedData = filtered.slice(startIndex, startIndex + itemsPerPage);
 
   return (
     <Layout>
