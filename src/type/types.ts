@@ -3,11 +3,13 @@ export interface Product {
     name: string;
     type: string;
     size: string;
-    form: string;
-    standard: string;
-    warehouse: string;
-    unit: string;
+    stock?: number;
     price: number;
-    lastPriceDate: string;
+    lastUpdate?: string;       
+    lastPriceDate?: string | null;    
+    form?: string;
+    standard?: string;
+    warehouse?: string;
+    unit?: string;
   }
   
