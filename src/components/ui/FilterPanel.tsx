@@ -10,7 +10,7 @@ type Props = {
 const FilterPanel: FC<Props> = ({ type, size, onTypeChange, onSizeChange }) => {
   return (
     <div className="flex flex-col md:flex-row items-start md:items-center gap-4 bg-white rounded-lg shadow p-4 mb-4">
-      <div className="flex flex-col gap-1 w-full md:w-1/3">
+      <div className="flex flex-col gap-1 w-full md:w-1/2">
         <label className="text-sm">نوع میلگرد</label>
         <select
           value={type}
@@ -23,7 +23,7 @@ const FilterPanel: FC<Props> = ({ type, size, onTypeChange, onSizeChange }) => {
         </select>
       </div>
 
-      <div className="flex flex-col gap-1 w-full md:w-1/3">
+      <div className="flex flex-col gap-1 w-full md:w-1/2">
         <label className="text-sm">سایز</label>
         <select
           value={size}
