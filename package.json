@@ -13,6 +13,7 @@
     "@types/react-dom": "^19.1.7",
     "axios": "^1.11.0",
     "lucide-react": "^0.533.0",
+    "moment-jalaali": "^0.10.4",
     "prettier": "^3.6.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
@@ -49,6 +50,8 @@
     ]
   },
   "devDependencies": {
+    "@types/moment": "^2.11.29",
+    "@types/moment-jalaali": "^0.7.9",
     "@types/react-router-dom": "^5.3.3",
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.6",
