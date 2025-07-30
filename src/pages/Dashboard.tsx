@@ -1,9 +1,12 @@
 // src/pages/Dashboard.tsx
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Layout from "../components/layout/Layout";
 import Table from "../components/ui/Table";
 import SearchBox from "../components/ui/SearchBox";
 import FilterPanel from "../components/ui/FilterPanel";
+import { getProducts } from "../services/api";
+import { Product } from "../type/types";
+
 
 import Pagination from "../components/ui/Pagination";
 import DashboardChartLine from "../components/charts/DashboardChartLine";
@@ -11,23 +14,23 @@ import DashboardChartBar from "../components/charts/DashboardChartBar";
 import DashboardChartPie from "../components/charts/DashboardChartPie";
 
 const Dashboard = () => {
+
   const [query, setQuery] = useState("");
   const [type, setType] = useState("");
   const [size, setSize] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const [data, setData] = useState<Product[]>([]);
+  const itemsPerPage = 50;
 
-  const sampleData = [
-    // (میتونی دیتاهای بیشتری اضافه کنی برای تست صفحه‌بندی)
-    { id: 1, name: "میلگرد A3", type: "آجدار", size: "16", stock: 100, price: 26500, lastUpdate: "1403/05/07" },
-    { id: 2, name: "میلگرد A2", type: "ساده", size: "12", stock: 80, price: 24500, lastUpdate: "1403/05/07" },
-    { id: 3, name: "میلگرد A4", type: "آجدار", size: "14", stock: 120, price: 28500, lastUpdate: "1403/05/07" },
-    { id: 4, name: "میلگرد A3", type: "آجدار", size: "16", stock: 110, price: 27500, lastUpdate: "1403/05/07" },
-    { id: 5, name: "میلگرد A2", type: "ساده", size: "12", stock: 70, price: 24000, lastUpdate: "1403/05/07" },
-    { id: 6, name: "میلگرد A3", type: "آجدار", size: "16", stock: 90, price: 26000, lastUpdate: "1403/05/07" },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      const products: Product[] = await getProducts();
+      setData(products);
+    };
+    fetchData();
+  }, []);
 
-  const filteredData = sampleData.filter(
+  const filteredData = data.filter(
     (item) =>
       (item.name.includes(query) || item.type.includes(query)) &&
       (type === "" || item.type === type) &&
