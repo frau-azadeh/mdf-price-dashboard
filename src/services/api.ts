@@ -38,5 +38,16 @@ export const getLatestPriceAnalysis = async () => {
   return await response.json();
 };
 
+// Forcast
+export const getForecast = async () => {
+  try {
+    const response = await fetch("http://127.0.0.1:8000/forecast");
+    return await response.json();
+  } catch (error) {
+    console.error("خطا در دریافت پیش‌بینی:", error);
+    return { daily: [], weekly: [], monthly: [] };
+  }
+};
+
 
 
