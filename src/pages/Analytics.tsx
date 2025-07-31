@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { getLatestProducts, getLatestPriceAnalysis } from "../services/api";
 import { Product, PriceAnalysis } from "../type/types";
 import Pagination from "../components/ui/Pagination";
+import ScrollToTop from "../components/ui/ScrollToTap";
 
 const Analytics = () => {
   const [query, setQuery] = useState("");
@@ -65,6 +66,7 @@ const Analytics = () => {
 
   return (
     <Layout>
+      <ScrollToTop/>
       <h1 className="text-2xl font-bold mb-4">تحلیل قیمت میلگرد</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
         <div className="bg-white rounded-lg shadow p-4">
