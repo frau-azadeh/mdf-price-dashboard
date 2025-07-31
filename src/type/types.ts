@@ -12,4 +12,15 @@ export interface Product {
     warehouse?: string;
     unit?: string;
   }
+
+  export interface PriceAnalysis {
+    summary: {
+      average_price: number;
+      max_price: number;
+      min_price: number;
+    };
+    by_standard: Record<string, number>;
+    total_records: number;
+  }
+  
   
