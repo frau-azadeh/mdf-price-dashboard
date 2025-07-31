@@ -10,6 +10,7 @@ import Pagination from "../components/ui/Pagination";
 import DashboardChartLine from "../components/charts/DashboardChartLine";
 import DashboardChartBar from "../components/charts/DashboardChartBar";
 import DashboardChartPie from "../components/charts/DashboardChartPie";
+import ScrollToTop from "../components/ui/ScrollToTap";
 
 const Dashboard = () => {
   const [query, setQuery] = useState("");
@@ -17,7 +18,7 @@ const Dashboard = () => {
   const [size, setSize] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [data, setData] = useState<Product[]>([]);
-  const itemsPerPage = 25;
+  const itemsPerPage = 50;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,6 +43,7 @@ const Dashboard = () => {
 
   return (
     <Layout>
+      <ScrollToTop/>
       <h1 className="text-2xl font-bold mb-4">داشبورد مدیریت قیمت میلگرد</h1>
 
       {/* نمودارها */}
