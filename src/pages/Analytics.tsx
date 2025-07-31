@@ -5,10 +5,9 @@ import Table from "../components/ui/Table";
 import StockByTypeChart from "../components/charts/StockByTypeChart";
 import PriceLineChart from "../components/charts/PriceLineChart";
 import { useEffect, useState } from "react";
-import { getProducts } from "../services/api";
-import { Product } from "../type/types";
+import { getLatestProducts, getPriceAnalysis } from "../services/api";
+import { Product, PriceAnalysis } from "../type/types";
 import Pagination from "../components/ui/Pagination";
-
 
 const Analytics = () => {
   const [query, setQuery] = useState("");
@@ -16,21 +15,41 @@ const Analytics = () => {
   const [size, setSize] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [data, setData] = useState<Product[]>([]);
+  const [analysis, setAnalysis] = useState<PriceAnalysis | null>(null);
   const itemsPerPage = 50;
 
+  // ✅ دریافت داده محصولات
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchProducts = async () => {
       try {
-        const products = await getProducts();
+        const products = await getLatestProducts();
         setData(products);
       } catch (error) {
-        console.error("خطا در گرفتن داده‌ها:", error);
+        console.error("❌ خطا در گرفتن داده محصولات:", error);
       }
     };
-    fetchData();
+    fetchProducts();
   }, []);
 
-  // فیلتر کردن داده‌ها
+  // ✅ دریافت داده تحلیل از سرویس پایتون
+  useEffect(() => {
+    const fetchAnalysis = async () => {
+      try {
+        const result = await getPriceAnalysis(query, type, size);
+        if (result && !result.error) {
+          setAnalysis(result);
+        } else {
+          setAnalysis(null);
+        }
+      } catch (error) {
+        console.error("❌ خطا در گرفتن داده تحلیل:", error);
+        setAnalysis(null);
+      }
+    };
+    fetchAnalysis();
+  }, [query, type, size]);
+
+  // ✅ فیلتر داده‌ها
   const filtered = data.filter(
     (item) =>
       (item.name?.includes(query) || item.type?.includes(query)) &&
@@ -38,7 +57,7 @@ const Analytics = () => {
       (size === "" || item.size === size)
   );
 
-  // صفحه‌بندی
+  // ✅ صفحه‌بندی
   const totalPages = Math.ceil(filtered.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedData = filtered.slice(startIndex, startIndex + itemsPerPage);
@@ -53,7 +72,16 @@ const Analytics = () => {
         </div>
         <div className="bg-white rounded-lg shadow p-4">
           <h2 className="text-lg font-semibold mb-2">موجودی بر اساس نوع</h2>
-          <StockByTypeChart />
+          {analysis?.by_standard ? (
+            <StockByTypeChart
+              data={Object.entries(analysis.by_standard).map(([key, value]) => ({
+                name: key,
+                quantity: value as number,
+              }))}
+            />
+          ) : (
+            <p className="text-gray-500 text-sm">داده‌ای برای نمایش موجود نیست</p>
+          )}
         </div>
       </div>
       <div className="bg-white rounded-lg shadow p-4 space-y-4">
@@ -64,16 +92,13 @@ const Analytics = () => {
           onTypeChange={setType}
           onSizeChange={setSize}
         />
-        <Table data={paginatedData}  startIndex={startIndex}/>
-                <Pagination
-                  currentPage={currentPage}
-                  totalPages={totalPages}
-                  onPageChange={setCurrentPage}
-                />
-
+        <Table data={paginatedData} startIndex={startIndex} />
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
       </div>
-
-
     </Layout>
   );
 };
