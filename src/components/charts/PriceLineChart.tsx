@@ -1,20 +1,29 @@
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
 
-const data = [
-  { date: "1403/05/01", price: 27000 },
-  { date: "1403/05/02", price: 27300 },
-  { date: "1403/05/03", price: 27500 },
-  { date: "1403/05/04", price: 26800 },
-  { date: "1403/05/05", price: 27100 },
-];
+interface PriceLineChartProps {
+  analysisData: {
+    latest_date: string;
+    summary: {
+      average_price: number;
+      max_price: number;
+      min_price: number;
+    };
+  };
+}
 
-const PriceLineChart = () => {
+const PriceLineChart = ({ analysisData }: PriceLineChartProps) => {
+  const data = [
+    { name: "حداقل", price: analysisData.summary.min_price },
+    { name: "میانگین", price: analysisData.summary.average_price },
+    { name: "حداکثر", price: analysisData.summary.max_price },
+  ];
+
   return (
     <div className="w-full h-72">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="date" />
+          <XAxis dataKey="name" />
           <YAxis tickFormatter={(value) => `${value.toLocaleString()} تومان`} />
           <Tooltip formatter={(value: number) => `${value.toLocaleString()} تومان`} />
           <Line type="monotone" dataKey="price" stroke="#ef4444" strokeWidth={2} />
