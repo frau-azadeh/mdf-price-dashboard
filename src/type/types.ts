@@ -14,12 +14,15 @@ export interface Product {
   }
 
   export interface PriceAnalysis {
+    latest_date: string; 
     summary: {
       average_price: number;
       max_price: number;
       min_price: number;
     };
-    by_standard: Record<string, number>;
+    by_standard: {
+      [key: string]: number;
+    };
     total_records: number;
   }
   

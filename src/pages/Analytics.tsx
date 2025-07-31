@@ -5,7 +5,7 @@ import Table from "../components/ui/Table";
 import StockByTypeChart from "../components/charts/StockByTypeChart";
 import PriceLineChart from "../components/charts/PriceLineChart";
 import { useEffect, useState } from "react";
-import { getLatestProducts, getPriceAnalysis } from "../services/api";
+import { getLatestProducts, getLatestPriceAnalysis } from "../services/api";
 import { Product, PriceAnalysis } from "../type/types";
 import Pagination from "../components/ui/Pagination";
 
@@ -17,6 +17,7 @@ const Analytics = () => {
   const [data, setData] = useState<Product[]>([]);
   const [analysis, setAnalysis] = useState<PriceAnalysis | null>(null);
   const itemsPerPage = 50;
+
 
   // ✅ دریافت داده محصولات
   useEffect(() => {
@@ -35,7 +36,7 @@ const Analytics = () => {
   useEffect(() => {
     const fetchAnalysis = async () => {
       try {
-        const result = await getPriceAnalysis(query, type, size);
+        const result = await getLatestPriceAnalysis();
         if (result && !result.error) {
           setAnalysis(result);
         } else {
@@ -68,7 +69,11 @@ const Analytics = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
         <div className="bg-white rounded-lg shadow p-4">
           <h2 className="text-lg font-semibold mb-2">نمودار تغییر قیمت</h2>
-          <PriceLineChart />
+          {analysis?.summary ? (
+            <PriceLineChart analysisData={analysis} />
+          ) : (
+            <p className="text-gray-500 text-sm">داده‌ای برای نمایش موجود نیست</p>
+          )}
         </div>
         <div className="bg-white rounded-lg shadow p-4">
           <h2 className="text-lg font-semibold mb-2">موجودی بر اساس نوع</h2>

@@ -1,8 +1,10 @@
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts";
 
 interface StockByTypeChartProps {
   data: { name: string; quantity: number }[];
 }
+
+const COLORS = ["#6B7280", "#EF4444", "#9CA3AF", "#D1D5DB", "#F87171", "#FBBF24"];
 
 const StockByTypeChart = ({ data }: StockByTypeChartProps) => {
   return (
@@ -13,7 +15,11 @@ const StockByTypeChart = ({ data }: StockByTypeChartProps) => {
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
-          <Bar dataKey="quantity" fill="#3b82f6" />
+          <Bar dataKey="quantity">
+            {data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            ))}
+          </Bar>
         </BarChart>
       </ResponsiveContainer>
     </div>

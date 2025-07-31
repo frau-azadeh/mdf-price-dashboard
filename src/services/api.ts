@@ -24,15 +24,19 @@ export const getLatestProducts = async () => {
   }
 };
 
-//Analyze with python
+
+// Analyze all data
 export const getPriceAnalysis = async (query = "", type = "", size = "") => {
-  const params = new URLSearchParams({
-    query,
-    type,
-    size
-  });
+  const params = new URLSearchParams({ query, type, size });
   const response = await fetch(`http://127.0.0.1:8000/analyze?${params}`);
   return await response.json();
 };
+
+// Analyze only last date
+export const getLatestPriceAnalysis = async () => {
+  const response = await fetch(`http://127.0.0.1:8000/analyze-latest`);
+  return await response.json();
+};
+
 
 
