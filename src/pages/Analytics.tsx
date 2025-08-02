@@ -17,7 +17,7 @@ const Analytics = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [data, setData] = useState<Product[]>([]);
   const [analysis, setAnalysis] = useState<PriceAnalysis | null>(null);
-  const itemsPerPage = 50;
+  const itemsPerPage = 25;
 
 
   // ✅ دریافت داده محصولات
@@ -67,7 +67,7 @@ const Analytics = () => {
   return (
     <Layout>
       <ScrollToTop/>
-      <h1 className="text-2xl font-bold mb-4">تحلیل قیمت میلگرد</h1>
+      <h1 className="text-2xl font-bold mb-4">تحلیل قیمت MDF</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
         <div className="bg-white rounded-lg shadow p-4">
           <h2 className="text-lg font-semibold mb-2">نمودار تغییر قیمت</h2>
