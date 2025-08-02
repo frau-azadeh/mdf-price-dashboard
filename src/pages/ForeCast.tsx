@@ -33,7 +33,7 @@ const Forecast = () => {
   return (
     <Layout>
       <ScrollToTop/>
-      <h1 className="text-2xl font-bold mb-6">پیش‌بینی قیمت میلگرد</h1>
+      <h1 className="text-2xl font-bold mb-6">پیش‌بینی قیمت MDF</h1>
 
       {forecastData ? (
         <>

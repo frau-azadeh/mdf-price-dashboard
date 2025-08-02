@@ -18,7 +18,7 @@ const Dashboard = () => {
   const [size, setSize] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [data, setData] = useState<Product[]>([]);
-  const itemsPerPage = 50;
+  const itemsPerPage = 25;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,7 +44,7 @@ const Dashboard = () => {
   return (
     <Layout>
       <ScrollToTop/>
-      <h1 className="text-2xl font-bold mb-4">داشبورد مدیریت قیمت میلگرد</h1>
+      <h1 className="text-2xl font-bold mb-4">داشبورد مدیریت قیمت MDF</h1>
 
       {/* نمودارها */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
