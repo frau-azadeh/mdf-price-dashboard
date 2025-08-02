@@ -1,5 +1,5 @@
 
-# 📈 Rebar Price Dashboard
+# 📈 Mdf Price Dashboard
 
 ![React](https://img.shields.io/badge/React-18-61DAFB?logo=react)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?logo=tailwindcss)
@@ -7,7 +7,7 @@
 ![License](https://img.shields.io/badge/License-MIT-orange)
 
 ## 🚀 Overview
-Rebar Price Dashboard is a **modern frontend web application** that visualizes rebar pricing trends and forecasts.  
+Mdf Price Dashboard is a **modern frontend web application** that visualizes rebar pricing trends and forecasts.  
 It integrates with the `.NET API` and the `Python Analysis Service` to provide real-time analytics in a clean UI.
 
 ---
@@ -40,7 +40,7 @@ It integrates with the `.NET API` and the `Python Analysis Service` to provide r
 ## ⚙️ Installation
 
 # Clone the repo
-git clone https://github.com/frau-azadeh/rebar-price-dashboard.git
+git clone https://github.com/frau-azadeh/mdf-price-dashboard.git
 cd rebar-price-dashboard
 
 # Install dependencies
