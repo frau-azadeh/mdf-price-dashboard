@@ -40,14 +40,14 @@ It integrates with the `.NET API` and the `Python Analysis Service` to provide r
 ## ⚙️ Installation
 
 # Clone the repo
-git clone https://github.com/frau-azadeh/mdf-price-dashboard.git
-cd rebar-price-dashboard
+    git clone https://github.com/frau-azadeh/mdf-price-dashboard.git
+    cd mdf-price-dashboard
 
 # Install dependencies
-npm install
+    npm install
 
 # Run the app
-npm start
+    npm start
 
 ---
 
