@@ -1,4 +1,12 @@
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
+import {
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 interface PriceLineChartProps {
   analysisData: {
@@ -25,8 +33,15 @@ const PriceLineChart = ({ analysisData }: PriceLineChartProps) => {
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
           <YAxis tickFormatter={(value) => `${value.toLocaleString()} تومان`} />
-          <Tooltip formatter={(value: number) => `${value.toLocaleString()} تومان`} />
-          <Line type="monotone" dataKey="price" stroke="#ef4444" strokeWidth={2} />
+          <Tooltip
+            formatter={(value: number) => `${value.toLocaleString()} تومان`}
+          />
+          <Line
+            type="monotone"
+            dataKey="price"
+            stroke="#ef4444"
+            strokeWidth={2}
+          />
         </LineChart>
       </ResponsiveContainer>
     </div>

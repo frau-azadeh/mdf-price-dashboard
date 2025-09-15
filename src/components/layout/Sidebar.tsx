@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Menu, Home, BarChart3, Users, LineChart } from "lucide-react";
+
+import { BarChart3, Home, LineChart, Menu, Users } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {

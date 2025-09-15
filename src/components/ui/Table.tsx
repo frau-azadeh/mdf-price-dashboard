@@ -1,5 +1,7 @@
-import moment from "moment-jalaali";
 import { FC } from "react";
+
+import moment from "moment-jalaali";
+
 import { Product } from "../../type/types";
 
 type TableProps = {
@@ -7,7 +9,7 @@ type TableProps = {
   startIndex: number;
 };
 
-const Table: FC<TableProps> = ({ data , startIndex}) => {
+const Table: FC<TableProps> = ({ data, startIndex }) => {
   return (
     <div className="overflow-x-auto rounded-lg shadow bg-white">
       <table className="w-full text-sm text-right rtl:text-right">
@@ -28,9 +30,8 @@ const Table: FC<TableProps> = ({ data , startIndex}) => {
         <tbody>
           {data.map((item, i) => {
             const formattedDate = item.lastPriceDate
-            ? moment(item.lastPriceDate, "jYYYY-MM-DD").format("jYYYY/MM/DD")
-            : "-";
-          
+              ? moment(item.lastPriceDate, "jYYYY-MM-DD").format("jYYYY/MM/DD")
+              : "-";
 
             return (
               <tr key={item.id} className="border-b hover:bg-gray-50">

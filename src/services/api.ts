@@ -24,7 +24,6 @@ export const getLatestProducts = async () => {
   }
 };
 
-
 // Analyze all data
 export const getPriceAnalysis = async (query = "", type = "", size = "") => {
   const params = new URLSearchParams({ query, type, size });
@@ -48,6 +47,3 @@ export const getForecast = async () => {
     return { daily: [], weekly: [], monthly: [] };
   }
 };
-
-
-

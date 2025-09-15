@@ -1,18 +1,27 @@
 import { useEffect, useState } from "react";
+
 import {
-  BarChart,
   Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  Cell
 } from "recharts";
+
 import { getLatestProducts } from "../../services/api";
 import { Product } from "../../type/types";
 
-const COLORS = ["#6B7280", "#EF4444", "#9CA3AF", "#D1D5DB", "#F87171", "#FBBF24"]
+const COLORS = [
+  "#6B7280",
+  "#EF4444",
+  "#9CA3AF",
+  "#D1D5DB",
+  "#F87171",
+  "#FBBF24",
+];
 
 const DashboardChartBar = () => {
   const [data, setData] = useState<{ name: string; quantity: number }[]>([]);
@@ -25,7 +34,7 @@ const DashboardChartBar = () => {
           acc[key] = (acc[key] || 0) + 1;
           return acc;
         },
-        {}
+        {},
       );
 
       const chartData = Object.entries(grouped).map(([key, value]) => ({

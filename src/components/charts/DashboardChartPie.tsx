@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
+
 import {
-  PieChart,
-  Pie,
   Cell,
-  Tooltip,
   Legend,
+  Pie,
+  PieChart,
   ResponsiveContainer,
+  Tooltip,
 } from "recharts";
+
 import { getLatestProducts } from "../../services/api";
 import { Product } from "../../type/types";
 
@@ -16,7 +18,14 @@ interface ChartData {
 }
 
 // 🎨 رنگ‌ها مطابق تصویر
-const COLORS = ["#6B7280", "#EF4444", "#9CA3AF", "#D1D5DB", "#F87171", "#FBBF24"];
+const COLORS = [
+  "#6B7280",
+  "#EF4444",
+  "#9CA3AF",
+  "#D1D5DB",
+  "#F87171",
+  "#FBBF24",
+];
 
 const DashboardChartPie = () => {
   const [data, setData] = useState<ChartData[]>([]);
