@@ -1,9 +1,10 @@
-import ForecastTable from "../components/ui/ForecastTable";
-import Layout from "../components/layout/Layout";
-import ForecastChart from "../components/charts/ForecastChart";
 import { useEffect, useState } from "react";
-import { getForecast } from "../services/api";
+
+import ForecastChart from "../components/charts/ForecastChart";
+import Layout from "../components/layout/Layout";
+import ForecastTable from "../components/ui/ForecastTable";
 import ScrollToTop from "../components/ui/ScrollToTap";
+import { getForecast } from "../services/api";
 
 // 📌 تعریف اینترفیس داده پیش‌بینی
 interface ForecastItem {
@@ -20,7 +21,9 @@ interface ForecastResponse {
 }
 
 const Forecast = () => {
-  const [forecastData, setForecastData] = useState<ForecastResponse | null>(null);
+  const [forecastData, setForecastData] = useState<ForecastResponse | null>(
+    null,
+  );
 
   useEffect(() => {
     const fetchForecast = async () => {
@@ -32,7 +35,7 @@ const Forecast = () => {
 
   return (
     <Layout>
-      <ScrollToTop/>
+      <ScrollToTop />
       <h1 className="text-2xl font-bold mb-6">پیش‌بینی قیمت MDF</h1>
 
       {forecastData ? (
@@ -50,10 +53,16 @@ const Forecast = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-white p-4 rounded shadow">
-              <ForecastTable title="پیش‌بینی هفتگی" data={forecastData.weekly} />
+              <ForecastTable
+                title="پیش‌بینی هفتگی"
+                data={forecastData.weekly}
+              />
             </div>
             <div className="bg-white p-4 rounded shadow">
-              <ForecastTable title="پیش‌بینی ماهانه" data={forecastData.monthly} />
+              <ForecastTable
+                title="پیش‌بینی ماهانه"
+                data={forecastData.monthly}
+              />
             </div>
           </div>
         </>

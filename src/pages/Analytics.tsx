@@ -1,14 +1,15 @@
-import Layout from "../components/layout/Layout";
-import SearchBox from "../components/ui/SearchBox";
-import FilterPanel from "../components/ui/FilterPanel";
-import Table from "../components/ui/Table";
-import StockByTypeChart from "../components/charts/StockByTypeChart";
-import PriceLineChart from "../components/charts/PriceLineChart";
 import { useEffect, useState } from "react";
-import { getLatestProducts, getLatestPriceAnalysis } from "../services/api";
-import { Product, PriceAnalysis } from "../type/types";
+
+import PriceLineChart from "../components/charts/PriceLineChart";
+import StockByTypeChart from "../components/charts/StockByTypeChart";
+import Layout from "../components/layout/Layout";
+import FilterPanel from "../components/ui/FilterPanel";
 import Pagination from "../components/ui/Pagination";
 import ScrollToTop from "../components/ui/ScrollToTap";
+import SearchBox from "../components/ui/SearchBox";
+import Table from "../components/ui/Table";
+import { getLatestPriceAnalysis, getLatestProducts } from "../services/api";
+import { PriceAnalysis, Product } from "../type/types";
 
 const Analytics = () => {
   const [query, setQuery] = useState("");
@@ -18,7 +19,6 @@ const Analytics = () => {
   const [data, setData] = useState<Product[]>([]);
   const [analysis, setAnalysis] = useState<PriceAnalysis | null>(null);
   const itemsPerPage = 25;
-
 
   // ✅ دریافت داده محصولات
   useEffect(() => {
@@ -56,7 +56,7 @@ const Analytics = () => {
     (item) =>
       (item.name?.includes(query) || item.type?.includes(query)) &&
       (type === "" || item.type === type) &&
-      (size === "" || item.size === size)
+      (size === "" || item.size === size),
   );
 
   // ✅ صفحه‌بندی
@@ -66,7 +66,7 @@ const Analytics = () => {
 
   return (
     <Layout>
-      <ScrollToTop/>
+      <ScrollToTop />
       <h1 className="text-2xl font-bold mb-4">تحلیل قیمت MDF</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
         <div className="bg-white rounded-lg shadow p-4">
@@ -74,20 +74,26 @@ const Analytics = () => {
           {analysis?.summary ? (
             <PriceLineChart analysisData={analysis} />
           ) : (
-            <p className="text-gray-500 text-sm">داده‌ای برای نمایش موجود نیست</p>
+            <p className="text-gray-500 text-sm">
+              داده‌ای برای نمایش موجود نیست
+            </p>
           )}
         </div>
         <div className="bg-white rounded-lg shadow p-4">
           <h2 className="text-lg font-semibold mb-2">موجودی بر اساس نوع</h2>
           {analysis?.by_standard ? (
             <StockByTypeChart
-              data={Object.entries(analysis.by_standard).map(([key, value]) => ({
-                name: key,
-                quantity: value as number,
-              }))}
+              data={Object.entries(analysis.by_standard).map(
+                ([key, value]) => ({
+                  name: key,
+                  quantity: value as number,
+                }),
+              )}
             />
           ) : (
-            <p className="text-gray-500 text-sm">داده‌ای برای نمایش موجود نیست</p>
+            <p className="text-gray-500 text-sm">
+              داده‌ای برای نمایش موجود نیست
+            </p>
           )}
         </div>
       </div>

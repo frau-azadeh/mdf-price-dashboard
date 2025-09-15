@@ -28,8 +28,10 @@ const ForecastTable = ({ data, title }: ForecastTableProps) => {
         <tbody>
           {data.map((item, idx) => {
             // ✅ اگر تاریخ فرمت YYYY/MM/DD باشد، بدون تبدیل غیرضروری نمایش می‌دهیم
-            const formattedDate = moment(item.date, ["jYYYY/MM/DD", "YYYY/MM/DD"])
-              .format("jYYYY/MM/DD");
+            const formattedDate = moment(item.date, [
+              "jYYYY/MM/DD",
+              "YYYY/MM/DD",
+            ]).format("jYYYY/MM/DD");
 
             return (
               <tr key={idx} className="border-b hover:bg-gray-50">

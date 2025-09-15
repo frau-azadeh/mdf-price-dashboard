@@ -1,5 +1,13 @@
-import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from "recharts";
 import moment from "moment-jalaali";
+import {
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 interface ForecastChartProps {
   data: { date: string; predictedPrice: number }[];
@@ -7,13 +15,15 @@ interface ForecastChartProps {
 
 const ForecastChart = ({ data }: ForecastChartProps) => {
   // تبدیل تاریخ به timestamp
-  const formattedData = data.map(item => ({
+  const formattedData = data.map((item) => ({
     ...item,
-    timestamp: moment(item.date, ["jYYYY/MM/DD", "YYYY/MM/DD"]).toDate().getTime(),
+    timestamp: moment(item.date, ["jYYYY/MM/DD", "YYYY/MM/DD"])
+      .toDate()
+      .getTime(),
   }));
 
   // تولید لیست تیک‌های یکتا
-  const uniqueTicks = formattedData.map(item => item.timestamp);
+  const uniqueTicks = formattedData.map((item) => item.timestamp);
 
   return (
     <div className="w-full h-72">
@@ -23,7 +33,7 @@ const ForecastChart = ({ data }: ForecastChartProps) => {
           <XAxis
             dataKey="timestamp"
             type="number"
-            domain={['dataMin', 'dataMax']}
+            domain={["dataMin", "dataMax"]}
             ticks={uniqueTicks}
             allowDuplicatedCategory={false}
             tickFormatter={(time) => moment(time).format("jYYYY/MM/DD")}

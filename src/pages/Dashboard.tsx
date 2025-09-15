@@ -1,16 +1,17 @@
 // src/pages/Dashboard.tsx
 import { useEffect, useState } from "react";
+
+import DashboardChartBar from "../components/charts/DashboardChartBar";
+import DashboardChartLine from "../components/charts/DashboardChartLine";
+import DashboardChartPie from "../components/charts/DashboardChartPie";
 import Layout from "../components/layout/Layout";
-import Table from "../components/ui/Table";
-import SearchBox from "../components/ui/SearchBox";
 import FilterPanel from "../components/ui/FilterPanel";
+import Pagination from "../components/ui/Pagination";
+import ScrollToTop from "../components/ui/ScrollToTap";
+import SearchBox from "../components/ui/SearchBox";
+import Table from "../components/ui/Table";
 import { getLatestProducts } from "../services/api";
 import { Product } from "../type/types";
-import Pagination from "../components/ui/Pagination";
-import DashboardChartLine from "../components/charts/DashboardChartLine";
-import DashboardChartBar from "../components/charts/DashboardChartBar";
-import DashboardChartPie from "../components/charts/DashboardChartPie";
-import ScrollToTop from "../components/ui/ScrollToTap";
 
 const Dashboard = () => {
   const [query, setQuery] = useState("");
@@ -33,17 +34,20 @@ const Dashboard = () => {
     (item) =>
       (item.name.includes(query) || item.type.includes(query)) &&
       (type === "" || item.type === type) &&
-      (size === "" || item.size === size)
+      (size === "" || item.size === size),
   );
 
   // محاسبه صفحه‌بندی
   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedData = filteredData.slice(startIndex, startIndex + itemsPerPage);
+  const paginatedData = filteredData.slice(
+    startIndex,
+    startIndex + itemsPerPage,
+  );
 
   return (
     <Layout>
-      <ScrollToTop/>
+      <ScrollToTop />
       <h1 className="text-2xl font-bold mb-4">داشبورد مدیریت قیمت MDF</h1>
 
       {/* نمودارها */}
@@ -69,7 +73,7 @@ const Dashboard = () => {
           onSizeChange={setSize}
         />
         {/* ✅ داده صفحه‌بندی‌شده به جدول پاس داده می‌شود */}
-        <Table data={paginatedData}  startIndex={startIndex}/>
+        <Table data={paginatedData} startIndex={startIndex} />
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
